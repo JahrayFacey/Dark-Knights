@@ -9,16 +9,33 @@ public class NPC1 : MonoBehaviour
     public GameObject triggerText;
     public GameObject DialougeObject;
     public RigidbodyFirstPersonController rigid;
+    public bool hasTalked = false;
+    public bool isDialogue = false;
 
     private void OnTriggerStay(Collider other){
-        if(other.gameObject.tag == "Player"){
+        if(other.gameObject.tag == "Player" && !isDialogue)
+        {
+
             triggerText.SetActive(true);
             if(Input.GetKeyDown(KeyCode.E)){
-                other.gameObject.GetComponent<PlayerData>().DialougeNumber = 1;
+                isDialogue = true;
+                if (!hasTalked)
+                {
+                    other.gameObject.GetComponent<PlayerData>().DialougeNumber = 1;
                 DialougeObject.SetActive(true);
                 rigid.enabled = false;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                triggerText.SetActive(false);
+                }
+                else{
+                other.gameObject.GetComponent<PlayerData>().DialougeNumber = 1.5f;
+                DialougeObject.SetActive(true);
+                rigid.enabled = false;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                triggerText.SetActive(false);
+                }
             }
         }
     }
