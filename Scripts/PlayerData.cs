@@ -14,6 +14,8 @@ public class PlayerData : MonoBehaviour
     public float MaxHealth;
     public float CurrHealth;
 
+    public ObjectData[] Hotbar;
+
     [Header("UIComponents")]
     public Slider HealthSlider;
     public TextMeshProUGUI HealthText;
